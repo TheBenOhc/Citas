@@ -70,9 +70,15 @@
     .animate-spin-slow {
       animation: spin-slow 4s linear infinite;
     }
-    /* Estilos profesionales para la Ruleta Visual */
+    /* Estilos profesionales para la Ruleta con porciones delimitadas */
     .ruleta-wheel {
       transition: transform 4s cubic-bezier(0.15, 0.95, 0.15, 1);
+      background: conic-gradient(
+        #fd267a 0deg 90deg,
+        #ff6036 90deg 180deg,
+        #3b82f6 180deg 270deg,
+        #10b981 270deg 360deg
+      );
     }
   </style>
 </head>
@@ -224,7 +230,7 @@
     <!-- BLOQUE SIGUIENTE (Se despliega al hacer Like) -->
     <div id="flowContent" class="hidden transition-all duration-700">
 
-      <!-- PASO 2: Ruleta Visual Gigante e Interactiva (Corregida) -->
+      <!-- PASO 2: Ruleta con porciones delimitadas y emojis -->
       <section id="step2" class="py-16 px-4 sm:px-6 max-w-xl mx-auto text-center">
         
         <div class="bg-gradient-to-br from-dark-card via-dark-card to-dark-input border-2 border-tinder-pink/65 rounded-3xl p-6 sm:p-10 shadow-2xl shadow-tinder-pink/25 relative overflow-hidden">
@@ -240,27 +246,27 @@
             Girá la ruleta para que el destino elija el plan perfecto para nuestra cita:
           </p>
 
-          <!-- Contenedor Visual de la Ruleta Corregido -->
+          <!-- Contenedor Visual de la Ruleta con Sectores Delimitados -->
           <div class="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto mb-8 flex items-center justify-center">
             
             <!-- Puntero superior fijo -->
-            <div class="absolute -top-3 z-30 text-tinder-pink text-3xl filter drop-shadow-md">
+            <div class="absolute -top-3 z-30 text-white text-3xl filter drop-shadow-md">
               <i class="fa-solid fa-caret-down"></i>
             </div>
 
-            <!-- Rueda giratoria limpia -->
-            <div id="ruletaWheel" class="ruleta-wheel w-full h-full rounded-full border-4 border-tinder-pink bg-dark-bg/90 relative overflow-hidden shadow-2xl flex items-center justify-center">
+            <!-- Rueda giratoria con sectores coloreados (conic-gradient) -->
+            <div id="ruletaWheel" class="ruleta-wheel w-full h-full rounded-full border-4 border-white/30 relative overflow-hidden shadow-2xl flex items-center justify-center">
               
-              <!-- Secciones distribuidas uniformemente dentro de la rueda -->
-              <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div class="absolute top-4 text-[11px] font-bold text-amber-400">☕ Café & Charla</div>
-                <div class="absolute right-3 text-[11px] font-bold text-tinder-orange">🍺 Unas Birras</div>
-                <div class="absolute bottom-4 text-[11px] font-bold text-blue-400">🎟️ Cancha</div>
-                <div class="absolute left-3 text-[11px] font-bold text-emerald-400">🌴 Rambla</div>
+              <!-- Etiquetas orientadas en cada porción de la ruleta -->
+              <div class="absolute inset-0 pointer-events-none text-white font-extrabold text-xs drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+                <span class="absolute top-6 left-1/2 -translate-x-1/2">☕ Café</span>
+                <span class="absolute right-6 top-1/2 -translate-y-1/2">🍺 Birras</span>
+                <span class="absolute bottom-6 left-1/2 -translate-x-1/2">🎟️ Cancha</span>
+                <span class="absolute left-6 top-1/2 -translate-y-1/2">🌴 Rambla</span>
               </div>
               
               <!-- Centro fijo de la rueda -->
-              <div class="w-16 h-16 rounded-full tinder-gradient border-2 border-white/40 flex items-center justify-center text-white font-black text-xs shadow-lg z-20">
+              <div class="w-16 h-16 rounded-full tinder-gradient border-2 border-white/60 flex items-center justify-center text-white font-black text-xs shadow-lg z-20">
                 NACHO
               </div>
             </div>
@@ -455,14 +461,10 @@
               </label>
               <select id="plan" name="plan" required class="w-full bg-dark-input border border-dark-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-tinder-pink transition-colors text-sm">
                 <option value="" disabled selected>¿Qué te copa hacer?</option>
-                <option value="Dejas que elija yo">🔀 Dejas que elija yo</option>
                 <option value="Café & Charla">☕ Café & Charla tranqui</option>
                 <option value="Unas Birras">🍺 Unas birras para descontracturar</option>
                 <option value="Ir a la cancha">🎟️⚽ Ir a la cancha</option>
                 <option value="Paseo por la rambla">🌴 Paseo por la rambla</option>
-                <option value="Pizza o Asado">🍕 Ir por una buena pizza o comer algo</option>
-                <option value="Música & Tragos">🎶 Tragos & Música copada</option>
-                <option value="Sorprendeme">✨ Sorprendeme / Plan libre</option>
               </select>
             </div>
 
@@ -611,7 +613,7 @@
       }, 200);
     }
 
-    // Ruleta de Planes Visual
+    // Ruleta de Planes Visual con 4 Opciones Exactas
     const planesRuleta = [
       'Café & Charla', 
       'Unas Birras', 
@@ -638,7 +640,11 @@
       wheel.style.transform = `rotate(${currentRotation}deg)`;
 
       setTimeout(() => {
-        const elegido = planesRuleta[Math.floor(Math.random() * planesRuleta.length)];
+        // Determinar exactamente qué porción quedó arriba según el ángulo final
+        const normalizedDegree = (360 - (currentRotation % 360)) % 360;
+        let index = Math.floor(normalizedDegree / 90);
+        const elegido = planesRuleta[index];
+
         resEl.textContent = `✨ ¡El destino eligió: ${elegido}!`;
         btnAceptar.setAttribute('onclick', `selectPlan('${elegido}')`);
         btnAceptar.classList.remove('hidden');
