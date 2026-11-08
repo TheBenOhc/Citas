@@ -103,17 +103,17 @@
   <!-- Glow Background Effects -->
   <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-r from-tinder-pink/15 to-tinder-orange/15 blur-[140px] rounded-full pointer-events-none -z-10"></div>
 
-  <!-- Easter Egg de Nacional -->
-  <div id="bolsoEasterEgg" class="fixed bottom-6 left-6 z-50 max-w-xs bg-dark-card border border-blue-500/40 rounded-2xl p-4 shadow-2xl transform translate-y-32 opacity-0 transition-all duration-500 flex items-start gap-3">
-    <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center flex-shrink-0 p-1 shadow">
-      <img src="img/bolso.jpg" alt="Nacional" class="w-full h-full object-contain" />
+  <!-- Popup Flotante "Indecisa con el plan" (Reemplaza al Easter Egg de Nacional) -->
+  <div id="indecisaPopup" class="fixed bottom-6 left-6 z-50 max-w-xs bg-dark-card border border-tinder-pink/50 rounded-2xl p-4 shadow-2xl transform translate-y-32 opacity-0 transition-all duration-500 flex items-start gap-3 cursor-pointer hover:border-tinder-pink" onclick="mostrarRuleta()">
+    <div class="w-9 h-9 rounded-full tinder-gradient flex items-center justify-center text-white flex-shrink-0 shadow">
+      <i class="fa-solid fa-dice text-sm"></i>
     </div>
-    <div class="flex-grow">
+    <div class="flex-grow pr-2">
       <div class="flex items-center justify-between mb-1">
-        <h5 class="text-xs font-bold text-white">Dato clave ⚽</h5>
-        <button onclick="closeEasterEgg()" class="text-zinc-500 hover:text-white text-xs"><i class="fa-solid fa-xmark"></i></button>
+        <h5 class="text-xs font-bold text-white">¿Indecisa con el plan? 🎰</h5>
+        <button onclick="event.stopPropagation(); closeIndecisaPopup()" class="text-zinc-500 hover:text-white text-xs"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <p class="text-[11px] text-zinc-300 leading-snug">Si sos hincha del Bolso, automáticamente tenés puntos extra para la cita.</p>
+      <p class="text-[11px] text-zinc-300 leading-snug">Si no sabés cuál elegir, hacé click acá y girá la ruleta.</p>
     </div>
   </div>
 
@@ -164,7 +164,7 @@
         </span>
       </div>
 
-      <!-- Tarjeta Interactiva Swipe limpia (Sin "x o <3") -->
+      <!-- Tarjeta Interactiva Swipe limpia -->
       <div class="bg-dark-card/80 backdrop-blur-md border border-dark-border/80 rounded-2xl p-6 max-w-xl w-full text-left shadow-xl relative overflow-hidden" id="swipeCard">
         
         <!-- Estado Normal -->
@@ -301,7 +301,7 @@
         </div>
       </section>
 
-      <!-- PASO 4: FAQs y Sugerencia de Ruleta (Post-FAQ) -->
+      <!-- PASO 4: FAQs -->
       <section id="step4" class="py-12 px-4 sm:px-6 max-w-xl mx-auto text-left mb-12">
         <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-4 text-center">Detalles importantes</h3>
         
@@ -321,15 +321,6 @@
           </div>
         </div>
 
-        <!-- Popup / Sugerencia opcional para abrir la ruleta -->
-        <div class="bg-dark-card/90 border border-tinder-pink/40 rounded-2xl p-5 text-center shadow-xl mb-6">
-          <p class="text-sm font-bold text-white mb-2">¿Indecisa con el plan? 🎰</p>
-          <p class="text-xs text-zinc-300 mb-4">Si querés que el destino decida por vos, probá girar la ruleta.</p>
-          <button onclick="mostrarRuleta()" class="tinder-gradient hover:opacity-90 text-white font-bold py-2.5 px-5 rounded-xl text-xs transition-all shadow-md shadow-tinder-pink/30 inline-flex items-center gap-2">
-            <i class="fa-solid fa-dice"></i> Girá la ruleta
-          </button>
-        </div>
-
         <div class="text-center animate-bounce opacity-50">
           <a href="#agenda" class="text-zinc-400 hover:text-white text-xs inline-flex flex-col items-center gap-1">
             <span>Ir directo al formulario</span>
@@ -338,7 +329,7 @@
         </div>
       </section>
 
-      <!-- Ruleta Oculta (Aparece solo si hace click en el popup) -->
+      <!-- Ruleta Oculta (Aparece solo si hace click en el popup de la esquina) -->
       <section id="ruletaSection" class="py-12 px-4 sm:px-6 max-w-xl mx-auto text-center mb-12 hidden">
         
         <div class="bg-gradient-to-br from-dark-card via-dark-card to-dark-input border-2 border-tinder-pink/65 rounded-3xl p-6 sm:p-10 shadow-2xl shadow-tinder-pink/25 relative overflow-hidden">
@@ -551,17 +542,17 @@
       }
     });
 
-    // Easter Egg Nacional
+    // Aparición automática del popup "Indecisa" a los 3.5 segundos
     window.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
-        const egg = document.getElementById('bolsoEasterEgg');
-        if(egg) egg.classList.remove('translate-y-32', 'opacity-0');
-      }, 3000);
+        const popup = document.getElementById('indecisaPopup');
+        if(popup) popup.classList.remove('translate-y-32', 'opacity-0');
+      }, 3500);
     });
 
-    function closeEasterEgg() {
-      const egg = document.getElementById('bolsoEasterEgg');
-      if(egg) egg.classList.add('translate-y-32', 'opacity-0');
+    function closeIndecisaPopup() {
+      const popup = document.getElementById('indecisaPopup');
+      if(popup) popup.classList.add('translate-y-32', 'opacity-0');
     }
 
     // Swipe perfiles
@@ -601,8 +592,9 @@
       }, 200);
     }
 
-    // Mostrar ruleta al hacer click en el popup de la sugerencia
+    // Mostrar ruleta al hacer click en el popup flotante
     function mostrarRuleta() {
+      closeIndecisaPopup();
       const ruletaSec = document.getElementById('ruletaSection');
       ruletaSec.classList.remove('hidden');
       ruletaSec.scrollIntoView({ behavior: 'smooth' });
