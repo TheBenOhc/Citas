@@ -70,6 +70,10 @@
     .animate-spin-slow {
       animation: spin-slow 4s linear infinite;
     }
+    /* Estilos para la Ruleta Visual */
+    .ruleta-wheel {
+      transition: transform 4s cubic-bezier(0.15, 0.95, 0.15, 1);
+    }
   </style>
 </head>
 <body class="bg-dark-bg text-zinc-100 font-sans antialiased selection:bg-tinder-pink selection:text-white min-h-screen flex flex-col justify-between relative overflow-x-hidden">
@@ -107,33 +111,7 @@
     </div>
   </div>
 
-  <!-- Modal de Ruleta de Planes -->
-  <div id="ruletaModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-dark-card border border-dark-border rounded-3xl p-6 max-w-sm w-full text-center shadow-2xl relative animate-in fade-in zoom-in duration-200">
-      <button onclick="cerrarRuleta()" class="absolute top-4 right-4 text-zinc-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-      
-      <div class="w-12 h-12 rounded-full tinder-gradient flex items-center justify-center text-white text-xl mx-auto mb-4 shadow-lg shadow-tinder-pink/30">
-        <i class="fa-solid fa-dice animate-spin"></i>
-      </div>
-      <h3 class="text-xl font-extrabold text-white mb-1">Ruleta de Planes</h3>
-      <p class="text-xs text-zinc-400 mb-6">El destino ha decidido por vos:</p>
-      
-      <div id="resultadoRuleta" class="py-4 px-4 rounded-2xl bg-dark-input border border-tinder-pink text-white font-bold text-base mb-6 shadow-inner tinder-text-gradient">
-        ¡Girando...!?
-      </div>
-
-      <div class="flex gap-3">
-        <button onclick="girarRuleta()" class="flex-1 bg-dark-input border border-dark-border hover:border-zinc-500 text-white font-semibold py-2.5 px-4 rounded-xl text-xs transition-colors">
-          Girar de nuevo
-        </button>
-        <button id="btnAceptarPlan" onclick="" class="flex-1 tinder-gradient hover:opacity-90 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition-all shadow-md shadow-tinder-pink/20">
-          Elegir este plan
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Navbar con img/nacho.jpeg -->
+  <!-- Navbar sin botón de agendar -->
   <header id="mainHeader" class="sticky top-0 z-40 backdrop-blur-md bg-dark-bg/80 border-b border-dark-border/60">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
       <a href="#" class="flex items-center gap-2.5 font-bold text-xl tracking-tight">
@@ -147,10 +125,6 @@
         <a href="https://instagram.com/nacho.et10" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium text-zinc-300 hover:text-white transition-colors bg-dark-card hover:bg-dark-border px-3.5 py-1.5 rounded-full border border-dark-border shadow-sm">
           <i class="fa-brands fa-instagram text-tinder-pink"></i>
           <span>@nacho.et10</span>
-        </a>
-        <a href="#agenda" class="tinder-gradient hover:opacity-90 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-full transition-all duration-200 shadow-md shadow-tinder-pink/25 flex items-center gap-1.5">
-          <i class="fa-regular fa-calendar-check"></i>
-          <span>Agendar</span>
         </a>
       </div>
     </div>
@@ -184,7 +158,7 @@
         </span>
       </div>
 
-      <!-- Tarjeta Interactiva Swipe con img/nacho.jpeg -->
+      <!-- Tarjeta Interactiva Swipe con "x o <3" -->
       <div class="bg-dark-card/80 backdrop-blur-md border border-dark-border/80 rounded-2xl p-6 max-w-xl w-full text-left shadow-xl relative overflow-hidden" id="swipeCard">
         
         <!-- Estado Normal -->
@@ -216,7 +190,7 @@
             <button onclick="swipePass()" class="w-11 h-11 rounded-full bg-dark-input border border-dark-border text-zinc-400 hover:text-red-400 hover:border-red-400/50 flex items-center justify-center transition-all shadow">
               <i class="fa-solid fa-xmark text-lg"></i>
             </button>
-            <span class="text-[11px] text-zinc-500 font-medium uppercase tracking-widest">Deslizar perfil</span>
+            <span class="text-xs font-bold text-tinder-pink tracking-wider">x o &lt;3</span>
             <button onclick="swipeLike()" class="w-11 h-11 rounded-full bg-dark-input border border-dark-border text-tinder-pink hover:bg-tinder-pink hover:text-white flex items-center justify-center transition-all shadow shadow-tinder-pink/20">
               <i class="fa-solid fa-heart text-lg"></i>
             </button>
@@ -250,59 +224,67 @@
     <!-- BLOQUE SIGUIENTE (Se despliega al hacer Like) -->
     <div id="flowContent" class="hidden transition-all duration-700">
 
-      <!-- PASO 2: Ruleta y Planes -->
-      <section id="step2" class="py-12 px-4 sm:px-6 max-w-2xl mx-auto text-center">
-        <div class="flex flex-col sm:flex-row items-center justify-between mb-4 px-1 gap-2">
-          <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-400">Planes recomendados (Hacé clic para elegir)</h3>
-          <button onclick="abrirRuleta()" class="text-xs font-semibold text-tinder-pink hover:text-tinder-orange flex items-center gap-1.5 transition-colors bg-dark-card border border-dark-border px-3.5 py-1.5 rounded-full shadow-sm">
-            <i class="fa-solid fa-dice"></i> <span>Si elegir no es lo tuyo (¡Ruleta!)</span>
-          </button>
+      <!-- PASO 2: Ruleta Visual Gigante e Interactiva -->
+      <section id="step2" class="py-16 px-4 sm:px-6 max-w-xl mx-auto text-center">
+        
+        <div class="bg-gradient-to-br from-dark-card via-dark-card to-dark-input border-2 border-tinder-pink/60 rounded-3xl p-6 sm:p-10 shadow-2xl shadow-tinder-pink/25 relative overflow-hidden">
+          
+          <div class="w-14 h-14 rounded-full tinder-gradient flex items-center justify-center text-white text-xl mx-auto mb-3 shadow-lg shadow-tinder-pink/40 animate-pulse">
+            <i class="fa-solid fa-dice"></i>
+          </div>
+
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">
+            Ruleta de Planes 🎰
+          </h3>
+          <p class="text-xs sm:text-sm text-zinc-300 mb-8">
+            Girá la ruleta para que el destino elija el plan perfecto para nuestra cita:
+          </p>
+
+          <!-- Contenedor Visual de la Ruleta -->
+          <div class="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto mb-8 flex items-center justify-center">
+            
+            <!-- Puntero superior de la ruleta -->
+            <div class="absolute -top-3 z-20 text-tinder-pink text-3xl filter drop-shadow-md">
+              <i class="fa-solid fa-caret-down"></i>
+            </div>
+
+            <!-- Rueda giratoria -->
+            <div id="ruletaWheel" class="ruleta-wheel w-full h-full rounded-full border-4 border-tinder-pink bg-dark-bg relative overflow-hidden shadow-2xl flex items-center justify-center">
+              
+              <!-- Secciones simuladas en la rueda -->
+              <div class="absolute inset-0 flex flex-col items-center justify-between py-3 text-[11px] font-bold text-zinc-300 pointer-events-none">
+                <span class="text-tinder-pink">☕ Café & Charla</span>
+                <span class="text-tinder-orange">🍺 Unas Birras</span>
+                <span class="text-blue-400">🎟️ Ir a la cancha</span>
+                <span class="text-emerald-400">🌴 Rambla</span>
+                <span class="text-purple-400">🎶 Música & Tragos</span>
+              </div>
+              
+              <!-- Centro de la rueda -->
+              <div class="w-16 h-16 rounded-full tinder-gradient border-2 border-white/40 flex items-center justify-center text-white font-black text-xs shadow-lg z-10">
+                NACHO
+              </div>
+            </div>
+          </div>
+
+          <!-- Resultado y Botón de Giro -->
+          <div id="resultadoRuletaVisual" class="py-3 px-4 rounded-xl bg-dark-bg border border-tinder-pink text-white font-bold text-sm sm:text-base mb-6 shadow-inner tinder-text-gradient">
+            ¡Presioná para girar!
+          </div>
+
+          <div class="flex flex-col gap-3">
+            <button onclick="girarRuletaVisual()" id="btnGirarRuleta" class="w-full tinder-gradient hover:opacity-90 text-white font-bold py-3.5 px-6 rounded-2xl text-sm transition-all shadow-lg shadow-tinder-pink/30 flex items-center justify-center gap-2">
+              <i class="fa-solid fa-rotate"></i> ¡Girar Ruleta!
+            </button>
+            <button id="btnAceptarPlanRuleta" onclick="" class="w-full hidden bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-6 rounded-2xl text-sm transition-all shadow-lg shadow-emerald-600/30 items-center justify-center gap-2">
+              <i class="fa-solid fa-check"></i> Elegir este plan y agendar
+            </button>
+          </div>
+
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-12">
-          <div onclick="selectPlan('Café & Charla')" class="bg-dark-card/90 border border-dark-border hover:border-tinder-pink p-3 rounded-2xl cursor-pointer transition-all text-center group shadow-md">
-            <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-mug-hot text-sm"></i>
-            </div>
-            <h4 class="text-[11px] font-bold text-white mb-0.5">Café</h4>
-            <p class="text-[10px] text-zinc-400">Tranqui</p>
-          </div>
-
-          <div onclick="selectPlan('Unas Birras')" class="bg-dark-card/90 border border-dark-border hover:border-tinder-pink p-3 rounded-2xl cursor-pointer transition-all text-center group shadow-md">
-            <div class="w-9 h-9 rounded-xl bg-tinder-orange/10 text-tinder-orange flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-beer-mug-empty text-sm"></i>
-            </div>
-            <h4 class="text-[11px] font-bold text-white mb-0.5">Birras</h4>
-            <p class="text-[10px] text-zinc-400">Afterwork</p>
-          </div>
-
-          <div onclick="selectPlan('Ir a la cancha')" class="bg-dark-card/90 border border-dark-border hover:border-tinder-pink p-3 rounded-2xl cursor-pointer transition-all text-center group shadow-md">
-            <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-ticket text-xs"></i><i class="fa-solid fa-futbol text-xs ml-0.5"></i>
-            </div>
-            <h4 class="text-[11px] font-bold text-white mb-0.5">Cancha</h4>
-            <p class="text-[10px] text-zinc-400">Fútbol & Pasión</p>
-          </div>
-
-          <div onclick="selectPlan('Paseo por la rambla')" class="bg-dark-card/90 border border-dark-border hover:border-tinder-pink p-3 rounded-2xl cursor-pointer transition-all text-center group shadow-md">
-            <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-water text-sm"></i>
-            </div>
-            <h4 class="text-[11px] font-bold text-white mb-0.5">Rambla</h4>
-            <p class="text-[10px] text-zinc-400">Mate al sol</p>
-          </div>
-
-          <div onclick="selectPlan('Música & Tragos')" class="bg-dark-card/90 border border-dark-border hover:border-tinder-pink p-3 rounded-2xl cursor-pointer transition-all text-center group shadow-md col-span-2 sm:col-span-1">
-            <div class="w-9 h-9 rounded-xl bg-tinder-pink/10 text-tinder-pink flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-music text-sm"></i>
-            </div>
-            <h4 class="text-[11px] font-bold text-white mb-0.5">Música</h4>
-            <p class="text-[10px] text-zinc-400">Tragos & Beats</p>
-          </div>
-        </div>
-
-        <div class="mb-8 animate-bounce opacity-50">
-          <a href="#step3" class="text-zinc-400 hover:text-white text-xs flex flex-col items-center gap-1">
+        <div class="mt-8 animate-bounce opacity-50">
+          <a href="#step3" class="text-zinc-400 hover:text-white text-xs inline-flex flex-col items-center gap-1">
             <span>Ver pasiones y música</span>
             <i class="fa-solid fa-chevron-down"></i>
           </a>
@@ -630,43 +612,42 @@
       }, 200);
     }
 
-    // Ruleta de Planes
+    // Ruleta de Planes Visual
     const planesRuleta = [
       'Café & Charla', 
       'Unas Birras', 
       'Ir a la cancha', 
       'Paseo por la rambla', 
-      'Pizza o Asado', 
-      'Música & Tragos', 
-      'Sorprendeme'
+      'Música & Tragos'
     ];
 
-    function abrirRuleta() {
-      document.getElementById('ruletaModal').classList.remove('hidden');
-      girarRuleta();
-    }
+    let currentRotation = 0;
 
-    function cerrarRuleta() {
-      document.getElementById('ruletaModal').classList.add('hidden');
-    }
+    function girarRuletaVisual() {
+      const wheel = document.getElementById('ruletaWheel');
+      const resEl = document.getElementById('resultadoRuletaVisual');
+      const btnAceptar = document.getElementById('btnAceptarPlanRuleta');
+      const btnGirar = document.getElementById('btnGirarRuleta');
+      
+      btnGirar.disabled = true;
+      resEl.textContent = "🎲 Girando la ruleta...";
+      btnAceptar.classList.add('hidden');
+      btnAceptar.classList.remove('flex');
 
-    function girarRuleta() {
-      const resEl = document.getElementById('resultadoRuleta');
-      const btnAceptar = document.getElementById('btnAceptarPlan');
-      
-      resEl.textContent = "🎲 Girando...";
-      
+      // Calcular giro aleatorio (entre 5 y 8 vueltas completas + un ángulo aleatorio)
+      const randomDegree = Math.floor(Math.random() * 360) + 1800;
+      currentRotation += randomDegree;
+      wheel.style.transform = `rotate(${currentRotation}deg)`;
+
       setTimeout(() => {
         const elegido = planesRuleta[Math.floor(Math.random() * planesRuleta.length)];
-        resEl.textContent = elegido;
-        btnAceptar.setAttribute('onclick', `seleccionarPlanRuleta('${elegido}')`);
-      }, 400);
-    }
-
-    function seleccionarPlanRuleta(planName) {
-      cerrarRuleta();
-      selectPlan(planName);
-      confetti({ particleCount: 70, spread: 70, origin: { y: 0.6 } });
+        resEl.textContent = `✨ ¡El destino eligió: ${elegido}!`;
+        btnAceptar.setAttribute('onclick', `selectPlan('${elegido}')`);
+        btnAceptar.classList.remove('hidden');
+        btnAceptar.classList.add('flex');
+        btnGirar.disabled = false;
+        confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 } });
+      }, 4000);
     }
 
     function scrollCarousel(offset) {
