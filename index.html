@@ -28,25 +28,16 @@
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
           },
           colors: {
-            brand: {
-              50: '#fdf4ff',
-              100: '#fae8ff',
-              400: '#c084fc',
-              500: '#a855f7',
-              600: '#9333ea',
-              700: '#7e22ce',
-              900: '#3b0764',
-            },
-            accent: {
-              400: '#f472b6',
-              500: '#ec4899',
-              600: '#db2777',
+            tinder: {
+              pink: '#fd267a',
+              orange: '#ff6036',
+              light: '#fd5068',
             },
             dark: {
-              bg: '#09090b',
-              card: '#121217',
-              border: '#27272a',
-              input: '#18181b',
+              bg: '#0e0e10',
+              card: '#16161a',
+              border: '#2c2c35',
+              input: '#1c1c21',
             }
           }
         }
@@ -61,28 +52,35 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+    .tinder-gradient {
+      background: linear-gradient(45deg, #fd267a, #ff6036);
+    }
+    .tinder-text-gradient {
+      background: linear-gradient(45deg, #fd267a, #ff6036);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
   </style>
 </head>
-<body class="bg-dark-bg text-zinc-100 font-sans antialiased selection:bg-brand-500 selection:text-white min-h-screen flex flex-col justify-between relative overflow-x-hidden">
+<body class="bg-dark-bg text-zinc-100 font-sans antialiased selection:bg-tinder-pink selection:text-white min-h-screen flex flex-col justify-between relative overflow-x-hidden">
 
-  <!-- Glow Background Effects -->
-  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-tr from-brand-600/20 to-accent-500/20 blur-[120px] rounded-full pointer-events-none -z-10"></div>
-  <div class="fixed bottom-0 right-0 w-[500px] h-[500px] bg-brand-900/10 blur-[150px] rounded-full pointer-events-none -z-10"></div>
+  <!-- Glow Background Effects (Tinder Vibe) -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-r from-tinder-pink/15 to-tinder-orange/15 blur-[140px] rounded-full pointer-events-none -z-10"></div>
 
   <!-- Navbar -->
   <header class="sticky top-0 z-40 backdrop-blur-md bg-dark-bg/80 border-b border-dark-border/60">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
       <a href="#" class="flex items-center gap-2 font-bold text-xl tracking-tight">
-        <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-500 to-accent-500 flex items-center justify-center text-white text-sm">N</span>
-        <span>Nacho<span class="text-brand-400">.</span></span>
+        <span class="w-8 h-8 rounded-full tinder-gradient flex items-center justify-center text-white text-sm shadow-md shadow-tinder-pink/20">N</span>
+        <span>Nacho<span class="text-tinder-pink">.</span></span>
       </a>
       
       <div class="flex items-center gap-4">
-        <a href="https://instagram.com/nacho.et10" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium text-zinc-400 hover:text-white transition-colors bg-dark-card hover:bg-dark-border px-3 py-1.5 rounded-full border border-dark-border">
-          <i class="fa-brands fa-instagram text-pink-500"></i>
+        <a href="https://instagram.com/nacho.et10" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-sm font-medium text-zinc-300 hover:text-white transition-colors bg-dark-card hover:bg-dark-border px-3.5 py-1.5 rounded-full border border-dark-border shadow-sm">
+          <i class="fa-brands fa-instagram text-tinder-pink"></i>
           <span>@nacho.et10</span>
         </a>
-        <a href="#agenda" class="bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-full transition-all duration-200 shadow-lg shadow-brand-500/25 flex items-center gap-1.5">
+        <a href="#agenda" class="tinder-gradient hover:opacity-90 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-full transition-all duration-200 shadow-md shadow-tinder-pink/25 flex items-center gap-1.5">
           <i class="fa-regular fa-calendar-check"></i>
           <span>Agendar</span>
         </a>
@@ -92,15 +90,10 @@
 
   <main class="flex-grow">
     <!-- Hero Section -->
-    <section class="relative pt-12 pb-10 md:pt-16 md:pb-16 px-4 sm:px-6 max-w-5xl mx-auto text-center">
-      
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-dark-card border border-dark-border text-xs font-medium text-zinc-300 mb-6">
-        <i class="fa-solid fa-location-dot text-brand-400"></i>
-        <span>Montevideo, Uruguay</span>
-      </div>
+    <section class="relative pt-12 pb-10 md:pt-16 md:pb-12 px-4 sm:px-6 max-w-5xl mx-auto text-center">
 
       <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6">
-        Agendemos la cita<span class="text-brand-500">.</span>
+        Agendemos la cita<span class="tinder-text-gradient">.</span>
       </h1>
 
       <p class="text-base sm:text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
@@ -109,32 +102,32 @@
 
       <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10">
         <span class="px-3 py-1.5 rounded-full bg-dark-card border border-dark-border text-xs text-zinc-300 flex items-center gap-1.5">
-          <i class="fa-solid fa-code text-brand-400"></i> Developer
+          <i class="fa-solid fa-code text-tinder-pink"></i> Developer
         </span>
         <span class="px-3 py-1.5 rounded-full bg-dark-card border border-dark-border text-xs text-zinc-300 flex items-center gap-1.5">
           <i class="fa-solid fa-mug-hot text-amber-500"></i> Café & Mate
         </span>
         <span class="px-3 py-1.5 rounded-full bg-dark-card border border-dark-border text-xs text-zinc-300 flex items-center gap-1.5">
-          <i class="fa-solid fa-pizza-slice text-red-500"></i> Pizza & Asado
+          <i class="fa-solid fa-pizza-slice text-tinder-orange"></i> Pizza & Asado
         </span>
         <span class="px-3 py-1.5 rounded-full bg-dark-card border border-dark-border text-xs text-zinc-300 flex items-center gap-1.5">
-          <i class="fa-solid fa-shirt text-indigo-400"></i> Streetwear
+          <i class="fa-solid fa-shirt text-purple-400"></i> Streetwear
         </span>
       </div>
 
       <!-- Quick Bio Card -->
-      <div class="bg-dark-card/60 backdrop-blur-sm border border-dark-border/80 rounded-2xl p-6 max-w-xl mx-auto text-left shadow-xl mb-12">
+      <div class="bg-dark-card/80 backdrop-blur-md border border-dark-border/80 rounded-2xl p-6 max-w-xl mx-auto text-left shadow-xl mb-10">
         <div class="flex items-center gap-4 mb-3">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-brand-600 to-accent-500 flex items-center justify-center text-white text-lg font-bold border-2 border-dark-border shadow-md">
+          <div class="w-12 h-12 rounded-full tinder-gradient flex items-center justify-center text-white text-lg font-bold border border-dark-border shadow-md">
             N
           </div>
           <div>
             <h3 class="text-lg font-bold text-white flex items-center gap-2">
               Nacho
-              <i class="fa-solid fa-circle-check text-brand-400 text-sm"></i>
+              <i class="fa-solid fa-circle-check text-tinder-pink text-sm"></i>
             </h3>
             <div class="flex items-center gap-2 text-xs text-zinc-400">
-              <a href="https://instagram.com/nacho.et10" target="_blank" class="hover:text-pink-400 transition-colors flex items-center gap-1">
+              <a href="https://instagram.com/nacho.et10" target="_blank" class="hover:text-tinder-pink transition-colors flex items-center gap-1">
                 <i class="fa-brands fa-instagram"></i> @nacho.et10
               </a>
               <span>•</span>
@@ -147,17 +140,72 @@
           Me dedico al desarrollo de software, pero en mis tiempos libres busco desconectar de las pantallas, salir a tomar algo y conocer gente nueva con buena onda.
         </p>
       </div>
- <div class="max-w-4xl mx-auto text-left relative group">
+
+      <!-- Tarjetas de Planes Recomendados -->
+      <div class="max-w-2xl mx-auto mb-12 text-left">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-4 text-center">Planes recomendados (Hacé clic para elegir)</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+          
+          <!-- Plan Café -->
+          <div onclick="selectPlan('Café & Charla')" class="bg-dark-card/90 border border-dark-border hover:border-tinder-pink p-3 rounded-2xl cursor-pointer transition-all text-center group shadow-md">
+            <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-mug-hot text-sm"></i>
+            </div>
+            <h4 class="text-[11px] font-bold text-white mb-0.5">Café</h4>
+            <p class="text-[10px] text-zinc-400">Tranqui</p>
+          </div>
+
+          <!-- Plan Birras -->
+          <div onclick="selectPlan('Unas Birras')" class="bg-dark-card/90 border border-dark-border hover:border-tinder-pink p-3 rounded-2xl cursor-pointer transition-all text-center group shadow-md">
+            <div class="w-9 h-9 rounded-xl bg-tinder-orange/10 text-tinder-orange flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-beer-mug-empty text-sm"></i>
+            </div>
+            <h4 class="text-[11px] font-bold text-white mb-0.5">Birras</h4>
+            <p class="text-[10px] text-zinc-400">Afterwork</p>
+          </div>
+
+          <!-- Plan Cancha -->
+          <div onclick="selectPlan('Ir a la cancha')" class="bg-dark-card/90 border border-dark-border hover:border-tinder-pink p-3 rounded-2xl cursor-pointer transition-all text-center group shadow-md">
+            <div class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-ticket text-xs"></i><i class="fa-solid fa-futbol text-xs ml-0.5"></i>
+            </div>
+            <h4 class="text-[11px] font-bold text-white mb-0.5">Cancha</h4>
+            <p class="text-[10px] text-zinc-400">Fútbol & Pasión</p>
+          </div>
+
+          <!-- Plan Rambla -->
+          <div onclick="selectPlan('Paseo por la rambla')" class="bg-dark-card/90 border border-dark-border hover:border-tinder-pink p-3 rounded-2xl cursor-pointer transition-all text-center group shadow-md">
+            <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-water text-sm"></i>
+            </div>
+            <h4 class="text-[11px] font-bold text-white mb-0.5">Rambla</h4>
+            <p class="text-[10px] text-zinc-400">Mate al sol</p>
+          </div>
+
+          <!-- Plan Música -->
+          <div onclick="selectPlan('Música & Tragos')" class="bg-dark-card/90 border border-dark-border hover:border-tinder-pink p-3 rounded-2xl cursor-pointer transition-all text-center group shadow-md col-span-2 sm:col-span-1">
+            <div class="w-9 h-9 rounded-xl bg-tinder-pink/10 text-tinder-pink flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-music text-sm"></i>
+            </div>
+            <h4 class="text-[11px] font-bold text-white mb-0.5">Música</h4>
+            <p class="text-[10px] text-zinc-400">Tragos & Beats</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Carrusel de Pasiones & Artistas -->
+      <div class="max-w-4xl mx-auto text-left relative group mb-12">
         <div class="flex items-center justify-between mb-4 px-2">
           <div class="flex items-center gap-2">
-            <i class="fa-solid fa-compact-disc text-brand-400"></i>
+            <i class="fa-solid fa-compact-disc text-tinder-pink"></i>
             <h3 class="text-sm font-bold uppercase tracking-wider text-zinc-300">Mis Pasiones & Artistas</h3>
           </div>
           <div class="flex items-center gap-2">
-            <button onclick="scrollCarousel(-230)" class="w-8 h-8 rounded-full bg-dark-card border border-dark-border hover:border-brand-500 text-zinc-300 hover:text-white flex items-center justify-center transition-colors shadow">
+            <button onclick="scrollCarousel(-230)" class="w-8 h-8 rounded-full bg-dark-card border border-dark-border hover:border-tinder-pink text-zinc-300 hover:text-white flex items-center justify-center transition-colors shadow">
               <i class="fa-solid fa-chevron-left text-xs"></i>
             </button>
-            <button onclick="scrollCarousel(230)" class="w-8 h-8 rounded-full bg-dark-card border border-dark-border hover:border-brand-500 text-zinc-300 hover:text-white flex items-center justify-center transition-colors shadow">
+            <button onclick="scrollCarousel(230)" class="w-8 h-8 rounded-full bg-dark-card border border-dark-border hover:border-tinder-pink text-zinc-300 hover:text-white flex items-center justify-center transition-colors shadow">
               <i class="fa-solid fa-chevron-right text-xs"></i>
             </button>
           </div>
@@ -218,6 +266,27 @@
         </div>
       </div>
 
+      <!-- Sección de FAQs / Detalles -->
+      <div class="max-w-xl mx-auto text-left">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-4 text-center">Detalles importantes</h3>
+        
+        <div class="space-y-3">
+          <div class="bg-dark-card border border-dark-border rounded-2xl p-4 shadow-sm">
+            <h4 class="text-xs font-bold text-white mb-1 flex items-center gap-2">
+              <i class="fa-solid fa-location-dot text-tinder-pink"></i> ¿Dónde solemos vernos?
+            </h4>
+            <p class="text-xs text-zinc-400 pl-5">Por Pocitos, Punta Carretas o la rambla. Lugares copados para charlar tranqui.</p>
+          </div>
+
+          <div class="bg-dark-card border border-dark-border rounded-2xl p-4 shadow-sm">
+            <h4 class="text-xs font-bold text-white mb-1 flex items-center gap-2">
+              <i class="fa-solid fa-mug-hot text-amber-500"></i> ¿Mate, café o birra?
+            </h4>
+            <p class="text-xs text-zinc-400 pl-5">Depende de la hora y el clima. Todo suma si hay buena compañía y charla copada.</p>
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- Agenda Form Section -->
@@ -239,14 +308,14 @@
             <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">
               Tu Nombre *
             </label>
-            <input type="text" id="name" name="nombre" required placeholder="¿Cómo te llamás?" class="w-full bg-dark-input border border-dark-border rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-brand-500 transition-colors text-sm">
+            <input type="text" id="name" name="nombre" required placeholder="¿Cómo te llamás?" class="w-full bg-dark-input border border-dark-border rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-tinder-pink transition-colors text-sm">
           </div>
 
           <div>
             <label for="contact" class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">
               Instagram o WhatsApp *
             </label>
-            <input type="text" id="contact" name="contacto" required placeholder="@tu_usuario o 09x xxx xxx" class="w-full bg-dark-input border border-dark-border rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-brand-500 transition-colors text-sm">
+            <input type="text" id="contact" name="contacto" required placeholder="@tu_usuario o 09x xxx xxx" class="w-full bg-dark-input border border-dark-border rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-tinder-pink transition-colors text-sm">
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -254,14 +323,14 @@
               <label for="date" class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">
                 Fecha Tentativa *
               </label>
-              <input type="date" id="date" name="fecha" required class="w-full bg-dark-input border border-dark-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors text-sm">
+              <input type="date" id="date" name="fecha" required class="w-full bg-dark-input border border-dark-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-tinder-pink transition-colors text-sm">
             </div>
 
             <div>
               <label for="time" class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">
                 Horario *
               </label>
-              <select id="time" name="hora" required class="w-full bg-dark-input border border-dark-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors text-sm">
+              <select id="time" name="hora" required class="w-full bg-dark-input border border-dark-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-tinder-pink transition-colors text-sm">
                 <option value="" disabled selected>Elegí horario</option>
                 <option value="17:00">17:00 hs (Tarde/Café)</option>
                 <option value="19:00">19:00 hs (Afterwork)</option>
@@ -275,13 +344,16 @@
             <label for="plan" class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">
               Tipo de Plan Preferido *
             </label>
-            <select id="plan" name="plan" required class="w-full bg-dark-input border border-dark-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-500 transition-colors text-sm">
+            <select id="plan" name="plan" required class="w-full bg-dark-input border border-dark-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-tinder-pink transition-colors text-sm">
               <option value="" disabled selected>¿Qué te copa hacer?</option>
+              <option value="Dejas que elija yo">🔀 Dejas que elija yo</option>
               <option value="Café & Charla">☕ Café & Charla tranqui</option>
               <option value="Unas Birras">🍺 Unas birras para descontracturar</option>
+              <option value="Ir a la cancha">🎟️⚽ Ir a la cancha</option>
+              <option value="Paseo por la rambla">🌴 Paseo por la rambla</option>
               <option value="Pizza o Asado">🍕 Ir por una buena pizza o comer algo</option>
               <option value="Música & Tragos">🎶 Tragos & Música copada</option>
-              <option value="Sorpréndeme">✨ Sorpréndeme / Plan libre</option>
+              <option value="Sorprendeme">✨ Sorprendeme / Plan libre</option>
             </select>
           </div>
 
@@ -289,10 +361,10 @@
             <label for="notes" class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">
               Contame...
             </label>
-            <textarea id="notes" name="mensaje" rows="3" placeholder="contame si preferís algún lugar en especial o algún detalle..." class="w-full bg-dark-input border border-dark-border rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-brand-500 transition-colors text-sm resize-none"></textarea>
+            <textarea id="notes" name="mensaje" rows="3" placeholder="contame si preferís algún lugar en especial o algún detalle..." class="w-full bg-dark-input border border-dark-border rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-tinder-pink transition-colors text-sm resize-none"></textarea>
           </div>
 
-          <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-200 shadow-lg shadow-brand-500/25 flex items-center justify-center gap-2 text-sm mt-6">
+          <button type="submit" id="submitBtn" class="w-full tinder-gradient hover:opacity-90 text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-200 shadow-lg shadow-tinder-pink/25 flex items-center justify-center gap-2 text-sm mt-6">
             <span>Confirmar y Enviar Solicitud</span>
             <i class="fa-solid fa-paper-plane"></i>
           </button>
@@ -301,15 +373,15 @@
 
         <!-- Success Message Screen -->
         <div id="successState" class="hidden text-center py-8">
-          <div class="w-16 h-16 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/40 flex items-center justify-center mx-auto mb-4 text-2xl animate-bounce">
+          <div class="w-16 h-16 rounded-full bg-tinder-pink/20 text-tinder-pink border border-tinder-pink/40 flex items-center justify-center mx-auto mb-4 text-2xl animate-bounce">
             <i class="fa-solid fa-check"></i>
           </div>
           <h3 class="text-2xl font-extrabold text-white mb-2">¡Cita Solicitada!</h3>
           <p class="text-sm text-zinc-300 mb-6 max-w-sm mx-auto">
             ¡De más! Ya me llegó tu propuesta al mail. Te escribo a tu Instagram/WhatsApp en breve para confirmar el horario.
           </p>
-          <a href="https://instagram.com/nacho.et10" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-dark-input border border-dark-border text-sm font-semibold text-white hover:border-pink-500 transition-colors">
-            <i class="fa-brands fa-instagram text-pink-500"></i>
+          <a href="https://instagram.com/nacho.et10" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-dark-input border border-dark-border text-sm font-semibold text-white hover:border-tinder-pink transition-colors">
+            <i class="fa-brands fa-instagram text-tinder-pink"></i>
             <span>Ver mi Instagram @nacho.et10</span>
           </a>
         </div>
@@ -334,6 +406,14 @@
     function scrollCarousel(offset) {
       const container = document.getElementById('carouselContainer');
       container.scrollBy({ left: offset, behavior: 'smooth' });
+    }
+
+    function selectPlan(planName) {
+      const planSelect = document.getElementById('plan');
+      if (planSelect) {
+        planSelect.value = planName;
+        document.getElementById('agenda').scrollIntoView({ behavior: 'smooth' });
+      }
     }
 
     async function handleSubmit(event) {
