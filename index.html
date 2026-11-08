@@ -70,7 +70,7 @@
     .animate-spin-slow {
       animation: spin-slow 4s linear infinite;
     }
-    /* Estilos para la Ruleta Visual */
+    /* Estilos profesionales para la Ruleta Visual */
     .ruleta-wheel {
       transition: transform 4s cubic-bezier(0.15, 0.95, 0.15, 1);
     }
@@ -224,10 +224,10 @@
     <!-- BLOQUE SIGUIENTE (Se despliega al hacer Like) -->
     <div id="flowContent" class="hidden transition-all duration-700">
 
-      <!-- PASO 2: Ruleta Visual Gigante e Interactiva -->
+      <!-- PASO 2: Ruleta Visual Gigante e Interactiva (Corregida) -->
       <section id="step2" class="py-16 px-4 sm:px-6 max-w-xl mx-auto text-center">
         
-        <div class="bg-gradient-to-br from-dark-card via-dark-card to-dark-input border-2 border-tinder-pink/60 rounded-3xl p-6 sm:p-10 shadow-2xl shadow-tinder-pink/25 relative overflow-hidden">
+        <div class="bg-gradient-to-br from-dark-card via-dark-card to-dark-input border-2 border-tinder-pink/65 rounded-3xl p-6 sm:p-10 shadow-2xl shadow-tinder-pink/25 relative overflow-hidden">
           
           <div class="w-14 h-14 rounded-full tinder-gradient flex items-center justify-center text-white text-xl mx-auto mb-3 shadow-lg shadow-tinder-pink/40 animate-pulse">
             <i class="fa-solid fa-dice"></i>
@@ -240,34 +240,33 @@
             Girá la ruleta para que el destino elija el plan perfecto para nuestra cita:
           </p>
 
-          <!-- Contenedor Visual de la Ruleta -->
+          <!-- Contenedor Visual de la Ruleta Corregido -->
           <div class="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto mb-8 flex items-center justify-center">
             
-            <!-- Puntero superior de la ruleta -->
-            <div class="absolute -top-3 z-20 text-tinder-pink text-3xl filter drop-shadow-md">
+            <!-- Puntero superior fijo -->
+            <div class="absolute -top-3 z-30 text-tinder-pink text-3xl filter drop-shadow-md">
               <i class="fa-solid fa-caret-down"></i>
             </div>
 
-            <!-- Rueda giratoria -->
-            <div id="ruletaWheel" class="ruleta-wheel w-full h-full rounded-full border-4 border-tinder-pink bg-dark-bg relative overflow-hidden shadow-2xl flex items-center justify-center">
+            <!-- Rueda giratoria limpia -->
+            <div id="ruletaWheel" class="ruleta-wheel w-full h-full rounded-full border-4 border-tinder-pink bg-dark-bg/90 relative overflow-hidden shadow-2xl flex items-center justify-center">
               
-              <!-- Secciones simuladas en la rueda -->
-              <div class="absolute inset-0 flex flex-col items-center justify-between py-3 text-[11px] font-bold text-zinc-300 pointer-events-none">
-                <span class="text-tinder-pink">☕ Café & Charla</span>
-                <span class="text-tinder-orange">🍺 Unas Birras</span>
-                <span class="text-blue-400">🎟️ Ir a la cancha</span>
-                <span class="text-emerald-400">🌴 Rambla</span>
-                <span class="text-purple-400">🎶 Música & Tragos</span>
+              <!-- Secciones distribuidas uniformemente dentro de la rueda -->
+              <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div class="absolute top-4 text-[11px] font-bold text-amber-400">☕ Café & Charla</div>
+                <div class="absolute right-3 text-[11px] font-bold text-tinder-orange">🍺 Unas Birras</div>
+                <div class="absolute bottom-4 text-[11px] font-bold text-blue-400">🎟️ Cancha</div>
+                <div class="absolute left-3 text-[11px] font-bold text-emerald-400">🌴 Rambla</div>
               </div>
               
-              <!-- Centro de la rueda -->
-              <div class="w-16 h-16 rounded-full tinder-gradient border-2 border-white/40 flex items-center justify-center text-white font-black text-xs shadow-lg z-10">
+              <!-- Centro fijo de la rueda -->
+              <div class="w-16 h-16 rounded-full tinder-gradient border-2 border-white/40 flex items-center justify-center text-white font-black text-xs shadow-lg z-20">
                 NACHO
               </div>
             </div>
           </div>
 
-          <!-- Resultado y Botón de Giro -->
+          <!-- Resultado y Único Botón de Giro -->
           <div id="resultadoRuletaVisual" class="py-3 px-4 rounded-xl bg-dark-bg border border-tinder-pink text-white font-bold text-sm sm:text-base mb-6 shadow-inner tinder-text-gradient">
             ¡Presioná para girar!
           </div>
@@ -617,8 +616,7 @@
       'Café & Charla', 
       'Unas Birras', 
       'Ir a la cancha', 
-      'Paseo por la rambla', 
-      'Música & Tragos'
+      'Paseo por la rambla'
     ];
 
     let currentRotation = 0;
@@ -634,7 +632,7 @@
       btnAceptar.classList.add('hidden');
       btnAceptar.classList.remove('flex');
 
-      // Calcular giro aleatorio (entre 5 y 8 vueltas completas + un ángulo aleatorio)
+      // Calcular giro aleatorio (entre 5 y 8 vueltas completas + ángulo aleatorio)
       const randomDegree = Math.floor(Math.random() * 360) + 1800;
       currentRotation += randomDegree;
       wheel.style.transform = `rotate(${currentRotation}deg)`;
