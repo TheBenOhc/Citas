@@ -219,7 +219,7 @@
 
       <!-- Flecha de continuidad hacia abajo -->
       <div id="flowIndicator" class="mt-12 transition-opacity duration-500 opacity-50 animate-bounce">
-        <a href="#step2" class="text-zinc-400 hover:text-white text-sm flex flex-col items-center gap-1">
+        <a href="#step3" class="text-zinc-400 hover:text-white text-sm flex flex-col items-center gap-1">
           <span class="text-[11px] tracking-wider uppercase font-semibold">Explorar perfil</span>
           <i class="fa-solid fa-chevron-down"></i>
         </a>
@@ -229,72 +229,6 @@
 
     <!-- BLOQUE SIGUIENTE (Se despliega al hacer Like) -->
     <div id="flowContent" class="hidden transition-all duration-700">
-
-      <!-- PASO 2: Ruleta con porciones delimitadas y emojis -->
-      <section id="step2" class="py-16 px-4 sm:px-6 max-w-xl mx-auto text-center">
-        
-        <div class="bg-gradient-to-br from-dark-card via-dark-card to-dark-input border-2 border-tinder-pink/65 rounded-3xl p-6 sm:p-10 shadow-2xl shadow-tinder-pink/25 relative overflow-hidden">
-          
-          <div class="w-14 h-14 rounded-full tinder-gradient flex items-center justify-center text-white text-xl mx-auto mb-3 shadow-lg shadow-tinder-pink/40 animate-pulse">
-            <i class="fa-solid fa-dice"></i>
-          </div>
-
-          <h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">
-            Ruleta de Planes 🎰
-          </h3>
-          <p class="text-xs sm:text-sm text-zinc-300 mb-8">
-            Girá la ruleta para que el destino elija el plan perfecto para nuestra cita:
-          </p>
-
-          <!-- Contenedor Visual de la Ruleta con Sectores Delimitados -->
-          <div class="relative w-64 h-64 sm:w-72 sm:h-72 mx-auto mb-8 flex items-center justify-center">
-            
-            <!-- Puntero superior fijo -->
-            <div class="absolute -top-3 z-30 text-white text-3xl filter drop-shadow-md">
-              <i class="fa-solid fa-caret-down"></i>
-            </div>
-
-            <!-- Rueda giratoria con sectores coloreados (conic-gradient) -->
-            <div id="ruletaWheel" class="ruleta-wheel w-full h-full rounded-full border-4 border-white/30 relative overflow-hidden shadow-2xl flex items-center justify-center">
-              
-              <!-- Etiquetas orientadas en cada porción de la ruleta -->
-              <div class="absolute inset-0 pointer-events-none text-white font-extrabold text-xs drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
-                <span class="absolute top-6 left-1/2 -translate-x-1/2">☕ Café</span>
-                <span class="absolute right-6 top-1/2 -translate-y-1/2">🍺 Birras</span>
-                <span class="absolute bottom-6 left-1/2 -translate-x-1/2">🎟️ Cancha</span>
-                <span class="absolute left-6 top-1/2 -translate-y-1/2">🌴 Rambla</span>
-              </div>
-              
-              <!-- Centro fijo de la rueda -->
-              <div class="w-16 h-16 rounded-full tinder-gradient border-2 border-white/60 flex items-center justify-center text-white font-black text-xs shadow-lg z-20">
-                NACHO
-              </div>
-            </div>
-          </div>
-
-          <!-- Resultado y Único Botón de Giro -->
-          <div id="resultadoRuletaVisual" class="py-3 px-4 rounded-xl bg-dark-bg border border-tinder-pink text-white font-bold text-sm sm:text-base mb-6 shadow-inner tinder-text-gradient">
-            ¡Presioná para girar!
-          </div>
-
-          <div class="flex flex-col gap-3">
-            <button onclick="girarRuletaVisual()" id="btnGirarRuleta" class="w-full tinder-gradient hover:opacity-90 text-white font-bold py-3.5 px-6 rounded-2xl text-sm transition-all shadow-lg shadow-tinder-pink/30 flex items-center justify-center gap-2">
-              <i class="fa-solid fa-rotate"></i> ¡Girar Ruleta!
-            </button>
-            <button id="btnAceptarPlanRuleta" onclick="" class="w-full hidden bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-6 rounded-2xl text-sm transition-all shadow-lg shadow-emerald-600/30 items-center justify-center gap-2">
-              <i class="fa-solid fa-check"></i> Elegir este plan y agendar
-            </button>
-          </div>
-
-        </div>
-
-        <div class="mt-8 animate-bounce opacity-50">
-          <a href="#step3" class="text-zinc-400 hover:text-white text-xs inline-flex flex-col items-center gap-1">
-            <span>Ver pasiones y música</span>
-            <i class="fa-solid fa-chevron-down"></i>
-          </a>
-        </div>
-      </section>
 
       <!-- PASO 3: Pasiones & Artistas -->
       <section id="step3" class="py-12 px-4 sm:px-6 max-w-4xl mx-auto text-left relative mb-12">
@@ -377,7 +311,7 @@
       </section>
 
       <!-- PASO 4: FAQs y Detalles -->
-      <section id="step4" class="py-12 px-4 sm:px-6 max-w-xl mx-auto text-left mb-8">
+      <section id="step4" class="py-12 px-4 sm:px-6 max-w-xl mx-auto text-left mb-12">
         <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-4 text-center">Detalles importantes</h3>
         
         <div class="space-y-3 mb-8">
@@ -397,8 +331,74 @@
         </div>
 
         <div class="text-center animate-bounce opacity-50">
+          <a href="#ruletaSection" class="text-zinc-400 hover:text-white text-xs inline-flex flex-col items-center gap-1">
+            <span>¿No te decidís? Probá la ruleta</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- PASO 2 (Ahora ubicado POST-FAQ): Ruleta de Sugerencia Opcional -->
+      <section id="ruletaSection" class="py-12 px-4 sm:px-6 max-w-xl mx-auto text-center mb-12">
+        
+        <div class="bg-gradient-to-br from-dark-card via-dark-card to-dark-input border-2 border-tinder-pink/65 rounded-3xl p-6 sm:p-10 shadow-2xl shadow-tinder-pink/25 relative overflow-hidden">
+          
+          <div class="w-12 h-12 rounded-full tinder-gradient flex items-center justify-center text-white text-lg mx-auto mb-3 shadow-lg shadow-tinder-pink/40">
+            <i class="fa-solid fa-dice"></i>
+          </div>
+
+          <h3 class="text-xl sm:text-2xl font-extrabold text-white mb-1">
+            ¿Indecisa con el plan? 🎰
+          </h3>
+          <p class="text-xs text-zinc-300 mb-6">
+            Si no sabés cuál elegir para arrancar, girá la ruleta y dejá que decida por vos:
+          </p>
+
+          <!-- Contenedor Visual de la Ruleta Optimizada -->
+          <div class="relative w-56 h-56 sm:w-64 sm:h-64 mx-auto mb-6 flex items-center justify-center">
+            
+            <!-- Puntero superior fijo -->
+            <div class="absolute -top-3 z-30 text-white text-2xl filter drop-shadow-md">
+              <i class="fa-solid fa-caret-down"></i>
+            </div>
+
+            <!-- Rueda giratoria -->
+            <div id="ruletaWheel" class="ruleta-wheel w-full h-full rounded-full border-4 border-white/30 relative overflow-hidden shadow-2xl flex items-center justify-center">
+              
+              <!-- Etiquetas claras y ordenadas en los sectores -->
+              <div class="absolute inset-0 pointer-events-none text-white font-extrabold text-xs drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.9)]">
+                <span class="absolute top-4 left-1/2 -translate-x-1/2">☕ Café</span>
+                <span class="absolute right-4 top-1/2 -translate-y-1/2">🍺 Birras</span>
+                <span class="absolute bottom-4 left-1/2 -translate-x-1/2">🎟️ Cancha</span>
+                <span class="absolute left-4 top-1/2 -translate-y-1/2">🌴 Rambla</span>
+              </div>
+              
+              <!-- Centro fijo de la rueda -->
+              <div class="w-14 h-14 rounded-full tinder-gradient border-2 border-white/60 flex items-center justify-center text-white font-black text-[10px] shadow-lg z-20">
+                NACHO
+              </div>
+            </div>
+          </div>
+
+          <!-- Resultado y Único Botón de Giro -->
+          <div id="resultadoRuletaVisual" class="py-2.5 px-4 rounded-xl bg-dark-bg border border-tinder-pink text-white font-bold text-xs sm:text-sm mb-5 shadow-inner tinder-text-gradient">
+            ¡Presioná para girar!
+          </div>
+
+          <div class="flex flex-col gap-2.5">
+            <button onclick="girarRuletaVisual()" id="btnGirarRuleta" class="w-full tinder-gradient hover:opacity-90 text-white font-bold py-3 px-5 rounded-xl text-xs sm:text-sm transition-all shadow-lg shadow-tinder-pink/30 flex items-center justify-center gap-2">
+              <i class="fa-solid fa-rotate"></i> ¡Girar Ruleta Opcional!
+            </button>
+            <button id="btnAceptarPlanRuleta" onclick="" class="w-full hidden bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-5 rounded-xl text-xs sm:text-sm transition-all shadow-lg shadow-emerald-600/30 items-center justify-center gap-2">
+              <i class="fa-solid fa-check"></i> Elegir este plan y agendar
+            </button>
+          </div>
+
+        </div>
+
+        <div class="mt-6 animate-bounce opacity-50">
           <a href="#agenda" class="text-zinc-400 hover:text-white text-xs inline-flex flex-col items-center gap-1">
-            <span>Ir al formulario de cita</span>
+            <span>Ir directo al formulario</span>
             <i class="fa-solid fa-chevron-down"></i>
           </a>
         </div>
@@ -609,7 +609,7 @@
       confetti({ particleCount: 60, spread: 70, origin: { y: 0.4 } });
       
       setTimeout(() => {
-        document.getElementById('step2').scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('step3').scrollIntoView({ behavior: 'smooth' });
       }, 200);
     }
 
