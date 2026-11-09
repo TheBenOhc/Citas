@@ -103,7 +103,7 @@
   <!-- Glow Background Effects -->
   <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-r from-tinder-pink/15 to-tinder-orange/15 blur-[140px] rounded-full pointer-events-none -z-10"></div>
 
-  <!-- Popup Flotante "Indecisa con el plan" (Reemplaza al Easter Egg de Nacional) -->
+  <!-- Popup Flotante "Indecisa con el plan" -->
   <div id="indecisaPopup" class="fixed bottom-6 left-6 z-50 max-w-xs bg-dark-card border border-tinder-pink/50 rounded-2xl p-4 shadow-2xl transform translate-y-32 opacity-0 transition-all duration-500 flex items-start gap-3 cursor-pointer hover:border-tinder-pink" onclick="mostrarRuleta()">
     <div class="w-9 h-9 rounded-full tinder-gradient flex items-center justify-center text-white flex-shrink-0 shadow">
       <i class="fa-solid fa-dice text-sm"></i>
@@ -117,7 +117,7 @@
     </div>
   </div>
 
-  <!-- Navbar sin botón de agendar -->
+  <!-- Navbar -->
   <header id="mainHeader" class="sticky top-0 z-40 backdrop-blur-md bg-dark-bg/80 border-b border-dark-border/60">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
       <a href="#" class="flex items-center gap-2.5 font-bold text-xl tracking-tight">
@@ -164,7 +164,7 @@
         </span>
       </div>
 
-      <!-- Tarjeta Interactiva Swipe limpia -->
+      <!-- Tarjeta Interactiva Swipe -->
       <div class="bg-dark-card/80 backdrop-blur-md border border-dark-border/80 rounded-2xl p-6 max-w-xl w-full text-left shadow-xl relative overflow-hidden" id="swipeCard">
         
         <!-- Estado Normal -->
@@ -329,7 +329,7 @@
         </div>
       </section>
 
-      <!-- Ruleta Oculta (Aparece solo si hace click en el popup de la esquina) -->
+      <!-- Ruleta Oculta -->
       <section id="ruletaSection" class="py-12 px-4 sm:px-6 max-w-xl mx-auto text-center mb-12 hidden">
         
         <div class="bg-gradient-to-br from-dark-card via-dark-card to-dark-input border-2 border-tinder-pink/65 rounded-3xl p-6 sm:p-10 shadow-2xl shadow-tinder-pink/25 relative overflow-hidden">
@@ -345,7 +345,7 @@
             ¡Hacé click en <span class="text-tinder-pink font-bold">GIRAR</span> al centro de la ruleta!
           </p>
 
-          <!-- Contenedor Visual de la Ruleta (Clickeable en el centro) -->
+          <!-- Contenedor Visual de la Ruleta -->
           <div class="relative w-56 h-56 sm:w-64 sm:h-64 mx-auto mb-6 flex items-center justify-center">
             
             <!-- Puntero superior fijo -->
@@ -364,7 +364,7 @@
                 <span class="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-200">🌴 Rambla</span>
               </div>
               
-              <!-- Centro clickeable para girar (GIRAR) -->
+              <!-- Centro clickeable para girar -->
               <div onclick="girarRuletaVisual()" class="w-16 h-16 rounded-full tinder-gradient border-2 border-white/80 flex items-center justify-center text-white font-black text-xs shadow-2xl z-20 cursor-pointer hover:scale-105 transition-transform animate-pulse">
                 GIRAR
               </div>
@@ -419,6 +419,7 @@
                 <label for="date" class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">
                   Fecha Tentativa *
                 </label>
+                <!-- Validación min agregada dinámicamente -->
                 <input type="date" id="date" name="fecha" required class="w-full bg-dark-input border border-dark-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-tinder-pink transition-colors text-sm">
               </div>
 
@@ -426,11 +427,12 @@
                 <label for="time" class="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">
                   Horario *
                 </label>
+                <!-- Select limpio solo con horarios -->
                 <select id="time" name="hora" required class="w-full bg-dark-input border border-dark-border rounded-xl px-4 py-3 text-white focus:outline-none focus:border-tinder-pink transition-colors text-sm">
                   <option value="" disabled selected>Elegí horario</option>
-                  <option value="17:00">17:00 hs (Tarde/Café)</option>
-                  <option value="19:00">19:00 hs (Afterwork)</option>
-                  <option value="21:00">21:00 hs (Noche/Cena)</option>
+                  <option value="17:00">17:00</option>
+                  <option value="19:00">19:00</option>
+                  <option value="21:00">21:00</option>
                   <option value="A coordinar">A coordinar</option>
                 </select>
               </div>
@@ -542,12 +544,19 @@
       }
     });
 
-    // Aparición automática del popup "Indecisa" a los 3.5 segundos
+    // Aparición automática del popup "Indecisa" a los 3.5 segundos y validación de fecha mínima
     window.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         const popup = document.getElementById('indecisaPopup');
         if(popup) popup.classList.remove('translate-y-32', 'opacity-0');
       }, 3500);
+
+      // Asignar la fecha de hoy como mínimo en el input de fecha
+      const today = new Date().toISOString().split('T')[0];
+      const dateInput = document.getElementById('date');
+      if (dateInput) {
+        dateInput.setAttribute('min', today);
+      }
     });
 
     function closeIndecisaPopup() {
